@@ -15,7 +15,7 @@ import (
 func main() {
 	router := gin.Default()
 
-	server.InitDB()
+	server.InitMySQL()
 	server.Register(router)
 
 	srv := &http.Server{

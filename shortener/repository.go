@@ -10,17 +10,17 @@ type Repository interface {
 }
 
 type repository struct {
-	db *gorm.DB
+	mySQL *gorm.DB
 }
 
-func NewRepository(db *gorm.DB) Repository {
-	return &repository{db: db}
+func NewRepository(mySQL *gorm.DB) Repository {
+	return &repository{mySQL: mySQL}
 }
 
 func (r *repository) Create(m *Url) error {
-	return r.db.Table("url").Create(m).Error
+	return r.mySQL.Table("url").Create(m).Error
 }
 
 func (r *repository) Get(m *Url, id int) error {
-	return r.db.Table("url").Where("id = ?", id).First(m).Error
+	return r.mySQL.Table("url").Where("id = ?", id).First(m).Error
 }
