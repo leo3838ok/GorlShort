@@ -38,13 +38,12 @@ func (h *Handler) Create(c *gin.Context) {
 }
 
 func (h *Handler) Resolve(c *gin.Context) {
-	var url Url
 	id := base62.Decode(c.Param("code"))
-
-	if err := h.repo.Get(&url, id); err != nil {
+	url, err := h.repo.GetUrl(id)
+	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.Redirect(http.StatusFound, url.URL)
+	c.Redirect(http.StatusFound, url)
 }

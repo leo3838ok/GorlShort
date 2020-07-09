@@ -6,7 +6,7 @@ import (
 )
 
 func Register(r *gin.Engine) {
-	handler := shortener.NewHandler(shortener.NewRepository(MySQL))
+	handler := shortener.NewHandler(shortener.NewRepository(MySQL, Redis))
 
 	root := r.Group("/")
 	{

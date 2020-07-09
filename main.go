@@ -16,6 +16,7 @@ func main() {
 	router := gin.Default()
 
 	server.InitMySQL()
+	server.InitRedis()
 	server.Register(router)
 
 	srv := &http.Server{
