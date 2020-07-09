@@ -5,4 +5,5 @@ RUN go build -mod=vendor -o bin/server .
 
 FROM alpine:3.12
 COPY --from=build /src/bin/server .
+COPY --from=build /src/.env .
 ENTRYPOINT ./server
