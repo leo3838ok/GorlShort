@@ -9,10 +9,13 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/leo3838ok/go-url-shortener/server"
 )
 
 func main() {
 	router := gin.Default()
+
+	server.InitDB()
 
 	srv := &http.Server{
 		Addr:         ":8080",
