@@ -16,6 +16,7 @@ func main() {
 	router := gin.Default()
 
 	server.InitDB()
+	server.Register(router)
 
 	srv := &http.Server{
 		Addr:         ":8080",
