@@ -1,0 +1,21 @@
+version: '3'
+services:
+  shortener:
+    build: .
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - 8080:8080
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    command: --init-file /data/application/shortener.sql
+    volumes:
+      - ./database/shortener.sql:/data/application/shortener.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: shortener
+    ports:
+      - 3306:3306
