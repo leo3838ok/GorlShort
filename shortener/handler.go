@@ -3,6 +3,7 @@ package shortener
 import (
 	"fmt"
 	"net/http"
+	"net/url"
 
 	"github.com/gin-gonic/gin"
 	"github.com/leo3838ok/go-url-shortener/internal/base62"
@@ -23,27 +24,32 @@ func (h *Handler) Create(c *gin.Context) {
 		return
 	}
 
-	url := Url{URL: req.URL}
-	if err := h.repo.Create(&url); err != nil {
+	if _, err := url.ParseRequestURI(req.URL); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	m := Url{URL: req.URL}
+	if err := h.repo.Create(&m); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"data": gin.H{
-			"id":  url.ID,
-			"url": fmt.Sprintf("%s/%s", c.Request.Host, base62.Encode(url.ID)),
+			"id":  m.ID,
+			"url": fmt.Sprintf("%s/%s", c.Request.Host, base62.Encode(m.ID)),
 		},
 	})
 }
 
 func (h *Handler) Resolve(c *gin.Context) {
 	id := base62.Decode(c.Param("code"))
-	url, err := h.repo.GetUrl(id)
+	u, err := h.repo.GetUrl(id)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.Redirect(http.StatusFound, url)
+	c.Redirect(http.StatusFound, u)
 }
