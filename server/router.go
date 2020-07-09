@@ -8,6 +8,11 @@ import (
 func Register(r *gin.Engine) {
 	handler := shortener.NewHandler(shortener.NewRepository(DB))
 
+	root := r.Group("/")
+	{
+		root.GET("/:code", handler.Resolve)
+	}
+
 	v1 := r.Group("/v1")
 	{
 		v1.POST("/create", handler.Create)
