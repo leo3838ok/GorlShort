@@ -10,14 +10,16 @@ import (
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
+	"github.com/leo3838ok/go-url-shortener/internal/mysql"
+	"github.com/leo3838ok/go-url-shortener/internal/redis"
 	"github.com/leo3838ok/go-url-shortener/server"
 )
 
 func main() {
 	router := gin.Default()
 
-	server.InitMySQL()
-	server.InitRedis()
+	mysql.InitMySQL()
+	redis.InitRedis()
 	server.Register(router)
 
 	srv := &http.Server{
