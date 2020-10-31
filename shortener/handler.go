@@ -6,7 +6,7 @@ import (
 	"net/url"
 
 	"github.com/gin-gonic/gin"
-	"github.com/leo3838ok/go-url-shortener/internal/base62"
+	"github.com/leozhantw/go-url-shortener/internal/base62"
 )
 
 type Handler struct {

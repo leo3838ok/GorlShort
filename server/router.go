@@ -2,9 +2,9 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/leo3838ok/go-url-shortener/internal/mysql"
-	"github.com/leo3838ok/go-url-shortener/internal/redis"
-	"github.com/leo3838ok/go-url-shortener/shortener"
+	"github.com/leozhantw/go-url-shortener/internal/mysql"
+	"github.com/leozhantw/go-url-shortener/internal/redis"
+	"github.com/leozhantw/go-url-shortener/shortener"
 )
 
 func Register(r *gin.Engine) {
