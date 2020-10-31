@@ -1,5 +1,6 @@
 # GorlShort
 ![Go](https://github.com/leozhantw/GorlShort/workflows/Go/badge.svg?branch=master)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/leozhantw/GorlShort/blob/master/LICENSE)
 
 `GorlShort`is a URL shortener written with Golang、MySQL and Redis.
 
